@@ -26,5 +26,5 @@ do
 done
 gcloud compute ssh kobo < prep_server_step1.sh
 gcloud compute ssh kobo < prep_server_step2.sh
-
+gcloud compute ssh kobo --command="python3 run.py"
 
