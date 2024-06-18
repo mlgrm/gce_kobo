@@ -1,6 +1,9 @@
 #!/bin/bash -xe
 
-gcloud compute instances create kobo \
+HOST=${HOST:-kobo}
+IP_ADDR=${$IP_ADDR
+IP_ADDR=${IP_ADDR:-"34.89.142.168"}
+gcloud compute instances create $HOST \
 	--project=survey-tools \
 	--zone=europe-west3-a \
 	--machine-type=e2-medium \
@@ -20,11 +23,11 @@ gcloud compute instances create kobo \
 
 # wait for server to boot
 sleep 10
-until gcloud compute ssh kobo --command="echo server online."
+until gcloud compute ssh $HOST --command="echo server online."
 do
 	sleep 5
 done
-gcloud compute ssh kobo < prep_server_step1.sh
-gcloud compute ssh kobo < prep_server_step2.sh
-gcloud compute ssh kobo --command="python3 run.py"
+gcloud compute ssh $HOST < prep_server_step1.sh
+gcloud compute ssh $HOST < prep_server_step2.sh
+gcloud compute ssh $HOST --command="cd kobo-install && python3 run.py"
 
