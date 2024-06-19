@@ -1,13 +1,13 @@
---- docker-compose.backend.primary.override.yml	2024-06-19 13:12:48.687344376 +0000
-+++ docker-compose.backend.primary.override.yml.new	2024-06-19 13:11:51.474468350 +0000
+--- docker-compose.backend.primary.override.yml	2024-06-19 13:57:06.089732750 +0000
++++ docker-compose.backend.primary.override.yml.new	2024-06-19 13:58:12.943427594 +0000
 @@ -8,8 +8,8 @@
        - ../kobo-env/postgres/primary/postgres.conf:/kobo-docker-scripts/primary/postgres.conf
      #environment:
      #  - POSTGRES_BACKUP_FROM_SECONDARY=True
--    ports:
--      - 5432:5432
-+    #ports:
-+    #  - 5432:5432
+-    #ports:
+-    #  - 5432:5432
++    ports:
++      - 5432:5432
      networks:
        kobo-be-network:
          aliases:
