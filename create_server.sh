@@ -1,6 +1,6 @@
 #!/bin/bash -xe
 
-if [ -f .config ] then source .config
+if [ -f .config ]; then source .config; fi
 gcloud compute instances create $HOST \
 	--project=survey-tools \
 	--zone=europe-west3-a \
