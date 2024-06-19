@@ -1,0 +1,21 @@
+--- docker-compose.backend.primary.override.yml	2024-06-19 08:37:45.560769087 +0000
++++ docker-compose.backend.primary.override-new.yml	2024-06-19 10:42:12.934722017 +0000
+@@ -8,12 +8,12 @@
+       - ../kobo-env/postgres/primary/postgres.conf:/kobo-docker-scripts/primary/postgres.conf
+     #environment:
+     #  - POSTGRES_BACKUP_FROM_SECONDARY=True
+-    #ports:
+-    #  - 5432:5432
+-    networks:
+-      kobo-be-network:
+-        aliases:
+-          - postgres.kobo-dev.samuelhall.private
++    ports:
++      - 5432:5432
++    #networks:
++    #  kobo-be-network:
++    #    aliases:
++    #      - postgres.kobo-dev.samuelhall.private
+ 
+   mongo:
+     #ports:
