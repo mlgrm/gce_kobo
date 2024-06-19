@@ -1,11 +1,11 @@
 #!/bin/bash -xe
 
-source .config
+if [ -f .config ] then source .config
 gcloud compute instances create $HOST \
 	--project=survey-tools \
 	--zone=europe-west3-a \
 	--machine-type=e2-medium \
-	--network-interface=address=$IP_ADDR,network=default,network-tier=PREMIUM,stack-type=IPV4_ONLY \
+	--network-interface=address=$HOST,network=default,network-tier=PREMIUM,stack-type=IPV4_ONLY \
 	--maintenance-policy=MIGRATE \
 	--provisioning-model=STANDARD \
 	--service-account=957001946476-compute@developer.gserviceaccount.com \
@@ -28,4 +28,5 @@ done
 gcloud compute ssh $HOST < prep_server_step1.sh
 gcloud compute ssh $HOST < prep_server_step2.sh
 gcloud compute ssh $HOST --command="cd kobo-install && python3 run.py"
-
+gcloud compute ssh $HOST --command="cd kobo-docker && patch" < kobo-docker/docker-compose.backend.primary.override.yml.patch
+gcloud compute ssh $HOST < post_run.sh
